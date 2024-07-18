@@ -12,16 +12,22 @@ class EmailSerializer(serializers.Serializer):
         child=serializers.EmailField(), 
         required=False
     )
+    attachments = serializers.ListField(
+        child=serializers.FileField(), 
+        required=False
+    )
 
 
     class Meta:
-        fields = ['email', 'subject', 'body_text','cc_email']
+        fields = ['email', 'subject', 'body_text','cc_email','attachments']
 
     def validate(self, attrs):
         to_email = attrs.get('email')
         subject = attrs.get('subject')
         body_text = attrs.get('body_text')
         cc_email = attrs.get('cc_email', [])
+        attachments = attrs.get('attachments', [])
+
 
 
         data = {
