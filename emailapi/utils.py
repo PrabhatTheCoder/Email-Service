@@ -28,8 +28,12 @@ class Util:
                 to=[to_email],  # Pass to_email as a list
                 cc=cc_email
             )
+            # Attach files
             for attachment in attachments:
-                email.attach(attachment.name, attachment.read(), attachment.content_type)
+                if hasattr(attachment, 'name') and hasattr(attachment, 'read') and hasattr(attachment, 'content_type'):
+                    email.attach(attachment.name, attachment.read(), attachment.content_type)
+                else:
+                    raise ValidationError("Invalid attachment format")
 
             email.send()  # Send the email
             print("Email Sent")

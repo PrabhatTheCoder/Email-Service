@@ -1,10 +1,7 @@
 from rest_framework import serializers
 from emailapi.utils import Util
 
-
-
 class EmailSerializer(serializers.Serializer):
-    
     email = serializers.EmailField()
     subject = serializers.CharField(max_length=255)
     body_text = serializers.CharField()
@@ -17,9 +14,8 @@ class EmailSerializer(serializers.Serializer):
         required=False
     )
 
-
     class Meta:
-        fields = ['email', 'subject', 'body_text','cc_email','attachments']
+        fields = ['email', 'subject', 'body_text', 'cc_email', 'attachments']
 
     def validate(self, attrs):
         to_email = attrs.get('email')
@@ -28,14 +24,16 @@ class EmailSerializer(serializers.Serializer):
         cc_email = attrs.get('cc_email', [])
         attachments = attrs.get('attachments', [])
 
-
+        print(f"Attachments: {attachments}")  # Add logging here
 
         data = {
-            'to_email' : to_email,
-            'subject' : subject,
+            'to_email': to_email,
+            'subject': subject,
             'body': body_text,
-            'cc_email': cc_email
+            'cc_email': cc_email,
+            'attachments': attachments
         }
+
         try:
             Util.send_email(data)
         except Exception as e:
