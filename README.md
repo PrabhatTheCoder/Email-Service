@@ -17,5 +17,6 @@ Views.py is used to handle logics and fuctionality of the code..
     "cc_email" : ["hr@themedius.ai"]
 }
 
-![Screenshot from 2024-07-18 13-13-07](https://github.com/user-attachments/assets/795ae4f3-5991-4c60-aab7-3e9a361f9e3f)
+![Screenshot from 2024-07-18 18-00-03](https://github.com/user-attachments/assets/b013ae77-2d0f-4d8e-b225-a4d104825f31)
+
 Congratulation!! Your Email Service is working...
