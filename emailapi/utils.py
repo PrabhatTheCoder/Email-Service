@@ -11,6 +11,8 @@ class Util:
         cc_email = data['cc_email']
         from_email = os.environ.get("EMAIL_USER")  # Use environment variable for from_email
         to_email = data.get("to_email")  # Use the provided to_email from data
+        attachments = data['attachments']
+
 
         if not from_email:
             raise ValueError("EMAIL_USER environment variable is not set")
@@ -24,7 +26,11 @@ class Util:
                 body=body,
                 from_email=from_email,
                 to=[to_email],  # Pass to_email as a list
+                cc=cc_email
             )
+            for attachment in attachments:
+                email.attach(attachment.name, attachment.read(), attachment.content_type)
+
             email.send()  # Send the email
             print("Email Sent")
 
